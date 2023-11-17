@@ -2,6 +2,7 @@ import { Link } from "@remix-run/react";
 import { unSlugify } from "@/utils";
 import useFork from "@/hooks/useFork";
 import { GitFork, User } from "lucide-react";
+import type { MixSettings } from "@prisma/client";
 
 type Props = {
   communityMixes: MixSettings[];
@@ -31,7 +32,9 @@ function CommunityMixes({ communityMixes }: Props) {
                   <Link
                     key={communityMix.id}
                     title="Go to mix"
-                    to={`/${user}/${communityMix.songSlug}/${communityMix.id}`}
+                    to={`/${slugify(user)}/${communityMix.songSlug}/${
+                      communityMix.id
+                    }`}
                   >
                     <ul>
                       {/* <li>Song: {communityMix.title}</li>
@@ -44,7 +47,9 @@ function CommunityMixes({ communityMixes }: Props) {
                 </figcaption>
                 <div className="vertical-space-between">
                   <Link
-                    to={`/${user[i]}/${communityMix.songSlug}/${communityMix.id}`}
+                    to={`/${slugify(user[i])}/${communityMix.songSlug}/${
+                      communityMix.id
+                    }`}
                   >
                     {`${unSlugify(defaultValue)}`}
                   </Link>

@@ -6,6 +6,15 @@ export function roundFourth(num: number): number {
   return parseFloat((Math.round(num * 4) / 4).toFixed(2));
 }
 
+export function slugify(string: string) {
+  return string
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/[\s_-]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
 export function unSlugify(string: string) {
   return string
     .replace(/-/g, " ")

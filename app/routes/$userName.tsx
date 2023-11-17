@@ -4,6 +4,7 @@ import { getSessionUser } from "@/utils/session.server";
 import { useLoaderData, useNavigate } from "@remix-run/react";
 import UserMixes from "~/components/UserMixes";
 import { prisma } from "~/utils/db.server";
+import { slugify } from "~/utils";
 
 export const loader: LoaderFunction = async ({
   request,
@@ -13,9 +14,13 @@ export const loader: LoaderFunction = async ({
 
   if (!sessionUser) {
     return redirect("/");
-  } else if (sessionUser.userName !== userName) {
-    return redirect(`/${sessionUser.userName}`);
+  } else if (slugify(sessionUser.userName) !== userName) {
+    return redirect(`/${slugify(sessionUser.userName)}`);
   }
+
+  console.log("userName", userName);
+
+  console.log("sessionUser.userName", sessionUser.userName);
 
   const userMixes = await prisma.mixSettings.findMany({
     where: { userId: sessionUser.id },
@@ -38,7 +43,7 @@ export let action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
   const slug: FormDataEntryValue | null = form.get("slug");
 
-  return redirect(`/${sessionUser?.userName}/${slug}`);
+  return redirect(`/${slugify(sessionUser?.userName)}/${slug}`);
 };
 
 export default function DashboardRoute() {

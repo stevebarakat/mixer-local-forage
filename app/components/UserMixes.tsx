@@ -4,15 +4,16 @@ import useFork from "@/hooks/useFork";
 import useDelete from "@/hooks/useDelete";
 // import useTogglePrivacy from "@/hooks/useTogglePrivacy";
 import { GitFork, Trash, Lock, Unlock } from "lucide-react";
-import { unSlugify } from "@/utils";
-// import slugify from "react-slugify";
+import { slugify, unSlugify } from "@/utils";
+import type { AutomationData } from "@prisma/client";
 
 type Props = {
   user: User;
   userMixes: MainSettings[];
+  automationData: AutomationData[];
 };
 
-function UserMixes({ user, userMixes }: Props) {
+function UserMixes({ user, userMixes, automationData }: Props) {
   const navigate = useNavigate();
   const forkMix = useFork();
   const deleteMix = useDelete();
@@ -22,7 +23,7 @@ function UserMixes({ user, userMixes }: Props) {
     console.log("e.currentTarget.id", e.currentTarget.id);
     const id = parseInt(e.currentTarget.id, 10);
     return navigate(
-      `/${user.userName}/${userMixes[id].songSlug}/${userMixes[id].id}`
+      `/${slugify(user.userName)}/${userMixes[id].songSlug}/${userMixes[id].id}`
     );
   }
 
@@ -68,7 +69,9 @@ function UserMixes({ user, userMixes }: Props) {
                     userMixes={userMixes}
                   />
                   <Link
-                    to={`/${user.userName}/${userMix.songSlug}/${userMix.id}`}
+                    to={`/${slugify(user.userName)}/${userMix.songSlug}/${
+                      userMix.id
+                    }`}
                   >
                     {unSlugify(userMix.mixName)}
                   </Link>

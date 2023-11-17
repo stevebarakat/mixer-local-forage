@@ -1,8 +1,8 @@
 import type { ActionFunction, HeadersFunction } from "@remix-run/node";
 import { useActionData, Link, Form } from "@remix-run/react";
 import { login, createUserSession, register } from "@/utils/session.server";
-import slugify from "react-slugify";
 import { prisma as db } from "@/utils/db.server";
+import { slugify } from "~/utils";
 
 export let headers: HeadersFunction = () => {
   return {
@@ -60,7 +60,7 @@ export let action: ActionFunction = async ({
           formError: `Username/Password combination is incorrect`,
         };
       }
-      return createUserSession(user.id, `/${userName}`);
+      return createUserSession(user.id, `/${slugify(userName)}`);
     }
     case "register": {
       let userExists = await db.user.findFirst({ where: { userName } });
@@ -77,7 +77,7 @@ export let action: ActionFunction = async ({
           formError: `Something went wrong trying to create a new user.`,
         };
       }
-      return createUserSession(user.id, `/${userName}`);
+      return createUserSession(user.id, `/${slugify(userName)}`);
     }
     default: {
       return { fields, formError: `Login type invalid` };
