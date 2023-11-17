@@ -1,6 +1,7 @@
 import type { LoaderFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { getSessionUser } from "@/utils/session.server";
+import { slugify } from "@/utils";
 import { prisma } from "@/utils/db.server";
 import { defaultTrackData } from "@/assets/songs/defaultData";
 import { generateSlug } from "random-word-slugs";
@@ -14,8 +15,8 @@ export const loader: LoaderFunction = async ({
 
   if (!sessionUser) {
     return redirect("/");
-  } else if (sessionUser.userName !== userName) {
-    return redirect(`/${sessionUser.userName}`);
+  } else if (slugify(sessionUser.userName) !== userName) {
+    return redirect(`/${slugify(sessionUser.userName)}`);
   }
 
   const sourceSong = await getSourceSong(slug);
@@ -33,7 +34,6 @@ export const loader: LoaderFunction = async ({
   sourceSong?.tracks.forEach(async (track) => {
     await prisma.trackSettings.create({
       data: {
-        userId: sessionUser.id,
         mixSettingsId: mixSettings.id,
         songSlug: slug as string,
         name: track.name,
@@ -44,5 +44,11 @@ export const loader: LoaderFunction = async ({
     });
   });
 
-  return redirect(`/${sessionUser.userName}/${slug}/${mixSettings.id}`);
+  function ubu(sessionUser: User) {
+    setTimeout(() => null, 500);
+    return redirect(
+      `/${slugify(sessionUser.userName)}/${slug}/${mixSettings.id}`
+    );
+  }
+  return ubu(sessionUser);
 };

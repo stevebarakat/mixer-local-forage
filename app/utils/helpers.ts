@@ -16,6 +16,7 @@ export function slugify(string: string) {
 }
 
 export function unSlugify(string: string) {
+  if (typeof string !== "string") return;
   return string
     .replace(/-/g, " ")
     .toLowerCase()

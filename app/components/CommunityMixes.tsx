@@ -1,5 +1,5 @@
 import { Link } from "@remix-run/react";
-import { unSlugify } from "@/utils";
+import { slugify, unSlugify } from "@/utils";
 import useFork from "@/hooks/useFork";
 import { GitFork, User } from "lucide-react";
 import type { MixSettings } from "@prisma/client";

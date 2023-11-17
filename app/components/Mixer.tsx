@@ -16,5 +16,9 @@ export default function Mixer({
 
   invariant(tracks, "no tracks found");
 
+  console.log("sourceSong", sourceSong);
+  console.log("currentMix", currentMix);
+  console.log("currentTracks", currentTracks);
+
   return null;
 }

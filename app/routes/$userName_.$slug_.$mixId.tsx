@@ -1,7 +1,7 @@
 import { useLoaderData } from "@remix-run/react";
 import { json, redirect } from "@remix-run/node";
 import type { LoaderFunction } from "@remix-run/node";
-// import Mixer from "@/components/Mixer";
+import Mixer from "@/components/Mixer";
 import {
   getSourceSong,
   getCurrentMix,
@@ -37,13 +37,14 @@ export const loader: LoaderFunction = async ({
 };
 
 export default function MixNameRoute() {
+  const { sourceSong, currentMix, currentTracks } = useLoaderData();
   return (
     <MixerMachineContext.Provider>
-      {/* <Mixer
+      <Mixer
         sourceSong={sourceSong}
         currentMix={currentMix}
         currentTracks={currentTracks}
-      /> */}
+      />
     </MixerMachineContext.Provider>
   );
 }
