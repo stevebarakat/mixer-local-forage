@@ -2,6 +2,8 @@ import type { LoaderFunction, ActionFunction } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { getSessionUser } from "@/utils/session.server";
 import { useLoaderData, useNavigate } from "@remix-run/react";
+import UserMixes from "~/components/UserMixes";
+import { prisma } from "~/utils/db.server";
 
 export const loader: LoaderFunction = async ({
   request,
@@ -15,8 +17,17 @@ export const loader: LoaderFunction = async ({
     return redirect(`/${sessionUser.userName}`);
   }
 
+  const userMixes = await prisma.mixSettings.findMany({
+    where: { userId: sessionUser.id },
+    include: { trackSettings: true },
+    orderBy: {
+      createdAt: "asc",
+    },
+  });
+
   const data = {
     sessionUser,
+    userMixes,
   };
   return json(data);
 };
@@ -31,7 +42,7 @@ export let action: ActionFunction = async ({ request }) => {
 };
 
 export default function DashboardRoute() {
-  const { sessionUser } = useLoaderData();
+  const { sessionUser, userMixes } = useLoaderData();
   const navigate = useNavigate();
 
   function onChange(e: React.FormEvent<HTMLSelectElement>): void {
@@ -46,13 +57,16 @@ export default function DashboardRoute() {
   }
 
   return (
-    <select name="songs" id="song-select" onChange={onChange}>
-      <option value="">Choose a song:</option>
-      <option value="ninteenOne">Phoenix - 1901</option>
-      <option value="roxanne">The Police - Roxanne</option>
-      <option value="aDayInTheLife">The Beatles - A Day In The Life</option>
-      <option value="blueMonday">New Order - Blue Monday</option>
-      <option value="justDance">Lady Gaga - Just Dance</option>
-    </select>
+    <>
+      <UserMixes user={sessionUser} userMixes={userMixes} />
+      <select name="songs" id="song-select" onChange={onChange}>
+        <option value="">Choose a song:</option>
+        <option value="ninteenOne">Phoenix - 1901</option>
+        <option value="roxanne">The Police - Roxanne</option>
+        <option value="aDayInTheLife">The Beatles - A Day In The Life</option>
+        <option value="blueMonday">New Order - Blue Monday</option>
+        <option value="justDance">Lady Gaga - Just Dance</option>
+      </select>
+    </>
   );
 }

@@ -1,7 +1,6 @@
 import type { LoaderFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { getSessionUser } from "@/utils/session.server";
-import slugify from "react-slugify";
 import { prisma } from "@/utils/db.server";
 import { defaultTrackData } from "@/assets/songs/defaultData";
 import { generateSlug } from "random-word-slugs";
