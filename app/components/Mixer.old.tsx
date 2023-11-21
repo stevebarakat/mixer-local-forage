@@ -1,12 +1,12 @@
 import invariant from "tiny-invariant";
 import { useEffect } from "react";
-import localforage from "localforage";
 import Loader from "./Loader";
 import Transport from "./Transport";
 import useTracks from "~/hooks/useTracks";
 import { dbToPercent, log } from "~/utils";
 import Main from "./Main";
 import { TrackChannel } from "./Track";
+import localforage from "localforage";
 import * as Tone from "tone";
 const { Destination } = Tone;
 
@@ -26,49 +26,25 @@ export default function Mixer({
   invariant(tracks, "no tracks found");
   const { channels, isLoading } = useTracks({ tracks });
 
-  console.log("sourceSong", sourceSong);
-  console.log("currentMix", currentMix);
-  console.log("currentTracks", currentTracks);
-
   useEffect(() => {
     localforage
-      .setItem("sourceSong", sourceSong)
+      .setItem("key", "value")
       .then(function () {
-        return localforage.getItem("sourceSong");
+        return localforage.getItem("key");
       })
-      .then(function (sourceSong) {
-        console.log("sourceSong", sourceSong);
+      .then(function (value) {
+        // we got our value
+        console.log("value", value);
       })
       .catch(function (err) {
-        console.log("err", err);
-      });
-    localforage
-      .setItem("currentMix", currentMix)
-      .then(function () {
-        return localforage.getItem("currentMix");
-      })
-      .then(function (currentMix) {
-        console.log("currentMix", currentMix);
-      })
-      .catch(function (err) {
-        console.log("err", err);
-      });
-    localforage
-      .setItem("currentTracks", currentTracks)
-      .then(function () {
-        return localforage.getItem("currentTracks");
-      })
-      .then(function (currentTracks) {
-        console.log("currentTracks", currentTracks);
-      })
-      .catch(function (err) {
+        // we got an error
         console.log("err", err);
       });
 
     const volume = currentMix.volume;
     const scaled = dbToPercent(log(volume));
     Destination.volume.value = scaled;
-  }, [sourceSong, currentMix, currentTracks]);
+  }, [currentMix]);
 
   if (isLoading) {
     return <Loader song={sourceSong} />;
