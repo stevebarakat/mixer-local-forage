@@ -32,7 +32,7 @@ function CommunityMixes({ communityMixes }: Props) {
                   <Link
                     key={communityMix.id}
                     title="Go to mix"
-                    to={`/${slugify(user)}/${communityMix.songSlug}/${
+                    to={`/${slugify(user[0])}/${communityMix.songSlug}/${
                       communityMix.id
                     }`}
                   >

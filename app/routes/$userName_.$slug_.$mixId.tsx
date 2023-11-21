@@ -11,7 +11,13 @@ import invariant from "tiny-invariant";
 import { MixerMachineContext } from "@/context/MixerMachineContext";
 // import slugify from "react-slugify";
 import { getSessionUser } from "~/utils/session.server";
-import { useEffect } from "react";
+
+type Data = {
+  sourceSong: SourceSong | null;
+  currentMix: MainSettings | null;
+  currentTracks: TrackSettings[];
+  sessionUser: User | null;
+};
 
 export const loader: LoaderFunction = async ({
   request,
@@ -20,14 +26,14 @@ export const loader: LoaderFunction = async ({
   if (typeof mixId !== "string") return redirect(`/${userName}`);
 
   invariant(slug, "slug not found");
-  const currentTracks = await getCurrentTracks(mixId);
-  const currentMix = await getCurrentMix(mixId);
   const sourceSong = await getSourceSong(slug);
+  const currentMix = await getCurrentMix(mixId);
+  const currentTracks = await getCurrentTracks(mixId);
   const sessionUser = await getSessionUser(request);
 
   // if (currentMix?.id !== mixId) return redirect("/");
 
-  const data = {
+  const data: Data = {
     currentTracks,
     currentMix,
     sourceSong,

@@ -6,22 +6,20 @@ export async function getAutomationData() {
 }
 
 export async function getSourceSong(slug: string | undefined) {
-  const sourceSong = await prisma.song.findUnique({
+  return await prisma.song.findUnique({
     where: { slug },
     include: { tracks: true },
   });
-  return sourceSong;
 }
 
 export async function getCurrentMix(mixId: string) {
-  const currentMix = await prisma.mixSettings.findUnique({
+  return await prisma.mixSettings.findUnique({
     where: { id: mixId },
   });
-  return currentMix;
 }
 
 export async function getCurrentTracks(mixId: string) {
-  const currentTracks = await prisma.trackSettings.findMany({
+  return await prisma.trackSettings.findMany({
     where: {
       mixSettingsId: mixId,
     },
@@ -29,5 +27,4 @@ export async function getCurrentTracks(mixId: string) {
       position: "asc",
     },
   });
-  return currentTracks;
 }
