@@ -45,11 +45,7 @@ export const loader: LoaderFunction = async ({
     });
   });
 
-  function ubu(sessionUser: User) {
-    setTimeout(() => null, 500);
-    return redirect(
-      `/${slugify(sessionUser.userName)}/${slug}/${mixSettings.id}`
-    );
-  }
-  return ubu(sessionUser);
+  return redirect(
+    `/${slugify(sessionUser.userName)}/${slug}/${mixSettings.id}`
+  );
 };
