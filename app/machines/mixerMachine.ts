@@ -2,7 +2,10 @@ import { createMachine, assign } from "xstate";
 import { produce } from "immer";
 import { type Reverb, type FeedbackDelay, type PitchShift } from "tone";
 import { dbToPercent, localStorageGet, localStorageSet, log } from "@/utils";
-import { initialContext } from "~/components/Mixer";
+import localforage from "localforage";
+import { extendPrototype } from "localforage-getitems";
+
+extendPrototype(localforage);
 
 const initialContext: any = {
   sourceSong: { title: "" },
@@ -16,6 +19,10 @@ const initialContext: any = {
 };
 
 console.log("initialContext", initialContext);
+
+// const initialContextt = localforage.getItems().then(function (results) {
+//   console.log("results", results);
+// });
 
 export const mixerMachine = createMachine(
   {
@@ -52,12 +59,6 @@ export const mixerMachine = createMachine(
       context: {} as typeof initialContext,
       events: {} as
         | { type: "LOAD_SONG" }
-        | { type: "LOADED" }
-        | { type: "PLAY" }
-        | { type: "PAUSE" }
-        | { type: "REWIND" }
-        | { type: "FF" }
-        | { type: "RESET" }
         | { type: "SET_MAIN_VOLUME"; value: number }
         | {
             type: "SET_TRACK_VOLUME";
