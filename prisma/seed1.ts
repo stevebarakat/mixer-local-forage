@@ -24,7 +24,6 @@ export async function seed1() {
   await db.track.create({
     data: {
       songId: song.id,
-      position: 1,
       name: "Drums",
       path: "https://ioxpcmpvgermtfqxwykx.supabase.co/storage/v1/object/public/songs/roxanne/Roxanne_Drums.mp3",
     },
@@ -32,7 +31,6 @@ export async function seed1() {
   await db.track.create({
     data: {
       songId: song.id,
-      position: 2,
       name: "Bass",
       path: "https://ioxpcmpvgermtfqxwykx.supabase.co/storage/v1/object/public/songs/roxanne/Roxanne_Bass.mp3",
     },
@@ -40,7 +38,6 @@ export async function seed1() {
   await db.track.create({
     data: {
       songId: song.id,
-      position: 3,
       name: "Guitar",
       path: "https://ioxpcmpvgermtfqxwykx.supabase.co/storage/v1/object/public/songs/roxanne/Roxanne_Guitar.mp3",
     },
@@ -48,7 +45,6 @@ export async function seed1() {
   await db.track.create({
     data: {
       songId: song.id,
-      position: 4,
       name: "Vocals",
       path: "https://ioxpcmpvgermtfqxwykx.supabase.co/storage/v1/object/public/songs/roxanne/Roxanne_Vocal.mp3",
     },

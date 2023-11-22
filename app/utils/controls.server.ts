@@ -23,8 +23,5 @@ export async function getCurrentTracks(mixId: string) {
     where: {
       mixSettingsId: mixId,
     },
-    orderBy: {
-      position: "asc",
-    },
   });
 }

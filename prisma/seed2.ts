@@ -24,7 +24,6 @@ export async function seed2() {
   await db.track.create({
     data: {
       songId: song.id,
-      position: 1,
       name: "Bass/Drums",
       path: "https://ioxpcmpvgermtfqxwykx.supabase.co/storage/v1/object/public/songs/aDayInTheLife/bass-drums.mp3",
     },
@@ -32,7 +31,6 @@ export async function seed2() {
   await db.track.create({
     data: {
       songId: song.id,
-      position: 2,
       name: "Instruments",
       path: "https://ioxpcmpvgermtfqxwykx.supabase.co/storage/v1/object/public/songs/aDayInTheLife/instruments.mp3",
     },
@@ -40,7 +38,6 @@ export async function seed2() {
   await db.track.create({
     data: {
       songId: song.id,
-      position: 3,
       name: "Orchestra",
       path: "https://ioxpcmpvgermtfqxwykx.supabase.co/storage/v1/object/public/songs/aDayInTheLife/orchestra.mp3",
     },
@@ -48,7 +45,6 @@ export async function seed2() {
   await db.track.create({
     data: {
       songId: song.id,
-      position: 4,
       name: "Vocals",
       path: "https://ioxpcmpvgermtfqxwykx.supabase.co/storage/v1/object/public/songs/aDayInTheLife/vox.mp3",
     },

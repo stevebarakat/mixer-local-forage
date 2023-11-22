@@ -46,7 +46,6 @@ export default function Mixer({
     currentMix,
     currentTracks: tracks,
   };
-  console.log("initialContext", initialContext);
   const initialContextPromise = new Promise((resolve) =>
     resolve(initialContext)
   );
@@ -56,10 +55,6 @@ export default function Mixer({
   );
 
   const { channels, isLoading } = useTracks({ tracks });
-
-  // console.log("sourceSong", sourceSong);
-  // console.log("currentMix", currentMix);
-  // console.log("currentTracks", currentTracks);
 
   useEffect(() => {
     localforage
