@@ -6,6 +6,10 @@ export function roundFourth(num: number): number {
   return parseFloat((Math.round(num * 4) / 4).toFixed(2));
 }
 
+export function generateRandomNumber(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1) + min); // min and max included
+}
+
 export function slugify(string: string) {
   return string
     .toLowerCase()

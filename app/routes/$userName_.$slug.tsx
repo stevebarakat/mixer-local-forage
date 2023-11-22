@@ -1,7 +1,7 @@
 import type { LoaderFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { getSessionUser } from "@/utils/session.server";
-import { slugify } from "@/utils";
+import { generateRandomNumber, slugify } from "@/utils";
 import { prisma } from "@/utils/db.server";
 import { defaultTrackData } from "@/assets/songs/defaultData";
 import { generateSlug } from "random-word-slugs";
@@ -27,6 +27,7 @@ export const loader: LoaderFunction = async ({
       userId: sessionUser.id,
       userName: sessionUser.userName,
       volume: -32,
+      coverArt: generateRandomNumber(1, 9).toString(),
       mixName: generateSlug(),
     },
   });

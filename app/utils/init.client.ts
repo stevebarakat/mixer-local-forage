@@ -2,7 +2,7 @@ import localforage from "localforage";
 
 const ubu = () => {
   let initialSourceSong: SourceSong | unknown;
-  let initialCurrentMix: MainSettings | unknown;
+  let initialCurrentMix: MixSettings | unknown;
   let initialCurrentTracks: TrackSettings[] | unknown;
   window.addEventListener("load", () => {
     localforage

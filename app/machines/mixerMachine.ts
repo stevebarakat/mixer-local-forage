@@ -2,20 +2,17 @@ import { createMachine, assign } from "xstate";
 import { produce } from "immer";
 import { type Reverb, type FeedbackDelay, type PitchShift } from "tone";
 import { dbToPercent, localStorageGet, localStorageSet, log } from "@/utils";
-// import ebu from "~/utils/init.client";
+// import { initialContext } from "~/components/Mixer";
 
-// window.addEventListener("load", () => console.log("ebu", ebu));
-
-export type MixerContext = {
-  sourceSong: SourceSong | unknown;
-  currentMix: MainSettings | unknown;
-  currentTracks: TrackSettings[] | unknown;
-};
-
-const initialContext: MixerContext = {
-  sourceSong: {},
+const initialContext: any = {
+  sourceSong: { title: "" },
   currentMix: { volume: -32 },
-  currentTracks: [{}],
+  currentTracks: [
+    { volume: -32, fxNames: [], soloMute: { solo: false, mute: false } },
+    { volume: -32, fxNames: [], soloMute: { solo: false, mute: false } },
+    { volume: -32, fxNames: [], soloMute: { solo: false, mute: false } },
+    { volume: -32, fxNames: [], soloMute: { solo: false, mute: false } },
+  ],
 };
 
 console.log("initialContext", initialContext);

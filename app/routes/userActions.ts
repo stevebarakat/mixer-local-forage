@@ -1,7 +1,7 @@
 import { prisma as db } from "~/utils/db.server";
 import type { ActionFunction } from "@remix-run/node";
 import { getSessionUser } from "~/utils/session.server";
-import slugify from "react-slugify";
+import { slugify } from "~/utils";
 import { redirect } from "@remix-run/node";
 import { v4 as uuid } from "uuid";
 

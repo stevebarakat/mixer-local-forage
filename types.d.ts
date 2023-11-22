@@ -45,7 +45,7 @@ declare global {
     path: string;
   };
 
-  type MainSettings = MixSettings;
+  type MixSettings = MixSettings;
   type TrackSettings = PrismaTrackSettings;
   type User = PrismaUser;
 

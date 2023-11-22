@@ -45,7 +45,7 @@ model MixSettings {
   songSlug      String
   mixName       String          @unique
   artistPhoto   String          @default("default")
-  coverArt      String          @default("0")
+  coverArt      String          @default("1")
   private       Boolean         @default(false)
   likes         Int             @default(0)
   volume        Float           @default(-32)

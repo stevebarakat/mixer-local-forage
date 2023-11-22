@@ -11,7 +11,7 @@
     "seed": "esbuild prisma/seed.ts --outfile=node_modules/tmp-seed.cjs --bundle --format=cjs --external:prisma --external:@prisma/client && node node_modules/tmp-seed.cjs --preview-feature"
   },
   "prisma": {
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "run prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.6.0",
@@ -25,13 +25,14 @@
     "immer": "^10.0.3",
     "isbot": "^3.6.8",
     "localforage": "^1.10.0",
+    "localforage-setitems": "^1.4.0",
+    "lodash": "^4.17.21",
     "lucide-react": "^0.292.0",
     "prisma": "^5.6.0",
     "random-word-slugs": "^0.1.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-rnd": "^10.4.1",
-    "react-slugify": "^3.0.3",
     "tiny-invariant": "^1.3.1",
     "tone": "^14.7.77",
     "uuid": "^9.0.1",
@@ -41,6 +42,7 @@
     "@remix-run/dev": "^2.3.0",
     "@remix-run/eslint-config": "^2.3.0",
     "@types/bcryptjs": "^2.4.6",
+    "@types/lodash": "^4.14.202",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
     "@types/uuid": "^9.0.7",

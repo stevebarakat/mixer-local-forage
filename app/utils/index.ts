@@ -1,4 +1,10 @@
-import { array, roundFourth, slugify, unSlugify } from "./helpers";
+import {
+  array,
+  roundFourth,
+  slugify,
+  unSlugify,
+  generateRandomNumber,
+} from "./helpers";
 import { log, dbToPercent, scale } from "./scale";
 import { formatMilliseconds } from "./time";
 import { localStorageGet, localStorageSet } from "./localStorage.client";
@@ -10,6 +16,7 @@ export function getRandomNumber(min: number, max: number) {
 export {
   array,
   roundFourth,
+  generateRandomNumber,
   slugify,
   unSlugify,
   formatMilliseconds,

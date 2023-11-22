@@ -20,10 +20,10 @@ export default function Main() {
   }
 
   function saveVolume(e: React.FormEvent<HTMLInputElement>): void {
-    const currentMain = localStorageGet("currentMain");
+    const currentMix = localStorageGet("currentMix");
     const value = parseFloat(e.currentTarget.value);
-    currentMain.volume = value;
-    localStorageSet("currentMain", currentMain);
+    currentMix.volume = value;
+    localStorageSet("currentMix", currentMix);
   }
 
   return (

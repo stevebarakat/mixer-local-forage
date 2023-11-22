@@ -9,12 +9,11 @@ import {
 } from "@/utils/controls.server";
 import invariant from "tiny-invariant";
 import { MixerMachineContext } from "@/context/MixerMachineContext";
-// import slugify from "react-slugify";
 import { getSessionUser } from "~/utils/session.server";
 
 type Data = {
   sourceSong: SourceSong | null;
-  currentMix: MainSettings | null;
+  currentMix: MixSettings | null;
   currentTracks: TrackSettings[];
   sessionUser: User | null;
 };

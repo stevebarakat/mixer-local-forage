@@ -1,5 +1,6 @@
 import invariant from "tiny-invariant";
 import { useEffect } from "react";
+import { extendPrototype } from "localforage-setitems";
 import localforage from "localforage";
 import Loader from "./Loader";
 import Transport from "./Transport";
@@ -8,22 +9,51 @@ import { dbToPercent, log } from "~/utils";
 import Main from "./Main";
 import { TrackChannel } from "./Track";
 import * as Tone from "tone";
-const { Destination } = Tone;
 
-type Props = {
+const { Destination } = Tone;
+extendPrototype(localforage);
+
+export type MixerContext = {
   sourceSong: SourceSong;
-  currentMix: MainSettings;
+  currentMix: MixSettings;
   currentTracks: TrackSettings[];
 };
 
+type Props = {
+  sourceSong: SourceSong;
+  currentMix: MixSettings;
+  currentTracks: TrackSettings[];
+};
 export default function Mixer({
   sourceSong,
   currentMix,
   currentTracks,
 }: Props) {
-  const tracks = currentTracks;
+  const tracks = currentTracks.map((currentTrack) => ({
+    ...currentTrack,
+    soloMute: JSON.parse(currentTrack.soloMute),
+    fxNames: JSON.parse(currentTrack.fxNames),
+    delaySettings: JSON.parse(currentTrack.delaySettings),
+    reverbSettings: JSON.parse(currentTrack.reverbSettings),
+    pitchShiftSettings: JSON.parse(currentTrack.pitchShiftSettings),
+    panelPosition: JSON.parse(currentTrack.panelPosition),
+    panelSize: JSON.parse(currentTrack.panelSize),
+  }));
 
   invariant(tracks, "no tracks found");
+  const initialContext = {
+    sourceSong,
+    currentMix,
+    currentTracks: tracks,
+  };
+  const initialContextPromise = new Promise((resolve) =>
+    resolve(initialContext)
+  );
+
+  initialContextPromise.then((initialContext) =>
+    console.log("initialContextPrimise", initialContext)
+  );
+
   const { channels, isLoading } = useTracks({ tracks });
 
   // console.log("sourceSong", sourceSong);
@@ -32,34 +62,10 @@ export default function Mixer({
 
   useEffect(() => {
     localforage
-      .setItem("sourceSong", sourceSong)
-      .then(function () {
-        return localforage.getItem("sourceSong");
-      })
-      .then(function (sourceSong) {
-        console.log("sourceSong", sourceSong);
-      })
-      .catch(function (err) {
-        console.log("err", err);
-      });
-    localforage
-      .setItem("currentMix", currentMix)
-      .then(function () {
-        return localforage.getItem("currentMix");
-      })
-      .then(function (currentMix) {
-        console.log("currentMix", currentMix);
-      })
-      .catch(function (err) {
-        console.log("err", err);
-      });
-    localforage
-      .setItem("currentTracks", currentTracks)
-      .then(function () {
-        return localforage.getItem("currentTracks");
-      })
-      .then(function (currentTracks) {
-        console.log("currentTracks", currentTracks);
+      .setItems({
+        sourceSong,
+        currentMix,
+        currentTracks: tracks,
       })
       .catch(function (err) {
         console.log("err", err);
@@ -68,7 +74,7 @@ export default function Mixer({
     const volume = currentMix.volume;
     const scaled = dbToPercent(log(volume));
     Destination.volume.value = scaled;
-  }, [sourceSong, currentMix, currentTracks]);
+  }, [sourceSong, currentMix, tracks]);
 
   if (isLoading) {
     return <Loader song={sourceSong} />;
@@ -95,3 +101,4 @@ export default function Mixer({
     );
   }
 }
+// export { initialContext };

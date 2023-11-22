@@ -12,7 +12,7 @@ const { Destination } = Tone;
 
 type Props = {
   sourceSong: SourceSong;
-  currentMix: MainSettings;
+  currentMix: MixSettings;
   currentTracks: TrackSettings[];
 };
 

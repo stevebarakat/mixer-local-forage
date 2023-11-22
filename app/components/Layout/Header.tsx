@@ -1,5 +1,5 @@
 import { Link, useMatches } from "@remix-run/react";
-import { GitFork, Heart } from "lucide-react";
+import Logo from "../Logo";
 
 function Header() {
   const matches = useMatches();
@@ -9,7 +9,7 @@ function Header() {
 
   return (
     <nav className="top-nav">
-      <Link to="/">remixer</Link>
+      <Logo />
       <ul>
         {sessionUser ? (
           <>
@@ -27,10 +27,10 @@ function Header() {
         ) : (
           <>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/">home</Link>
             </li>
             <li>
-              <Link to="/login">Login</Link>
+              <Link to="/login">login</Link>
             </li>
           </>
         )}

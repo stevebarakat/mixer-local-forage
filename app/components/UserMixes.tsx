@@ -8,7 +8,7 @@ import { slugify, unSlugify } from "@/utils";
 
 type Props = {
   user: User;
-  userMixes: MainSettings[];
+  userMixes: MixSettings[];
 };
 
 function UserMixes({ user, userMixes }: Props) {
@@ -29,11 +29,11 @@ function UserMixes({ user, userMixes }: Props) {
     <div>
       {userMixes?.length > 0 && <h2>Your Mixes</h2>}
       <ol className="community-mix-list-container">
-        {userMixes?.map((userMix: MainSettings, i: number) => {
+        {userMixes?.map((userMix: MixSettings, i: number) => {
           const mixName = unSlugify(userMix.mixName);
           return (
             <div key={userMix.id} className="card">
-              <img src={`assets/${userMix.coverArt}.svg`} alt="ERROR!" />
+              <img src={`images/${userMix.coverArt}.svg`} alt="ERROR!" />
               <h3>{mixName}</h3>
               <div className="focus-content">
                 <footer
@@ -73,9 +73,6 @@ function UserMixes({ user, userMixes }: Props) {
                   >
                     {unSlugify(userMix.mixName)}
                   </Link>
-                  <button id={i.toString()} onClick={handleClick}>
-                    {unSlugify(userMix.mixName)}
-                  </button>
                 </footer>
               </div>
             </div>
