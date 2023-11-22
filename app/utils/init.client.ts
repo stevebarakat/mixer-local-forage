@@ -1,6 +1,6 @@
 import localforage from "localforage";
 
-const ubu = () => {
+const init = () => {
   let initialSourceSong: SourceSong | unknown;
   let initialCurrentMix: MixSettings | unknown;
   let initialCurrentTracks: TrackSettings[] | unknown;
@@ -37,5 +37,4 @@ const ubu = () => {
   });
   return { initialSourceSong, initialCurrentMix, initialCurrentTracks };
 };
-const ebu = ubu();
-export default ebu;
+export default init();

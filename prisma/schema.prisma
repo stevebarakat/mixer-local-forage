@@ -32,12 +32,11 @@ model Song {
 }
 
 model Track {
-  id       String @id @default(uuid())
-  position Int    @default(0)
-  name     String
-  path     String
-  song     Song   @relation(fields: [songId], references: [id])
-  songId   String
+  id     String @id @default(uuid())
+  name   String
+  path   String
+  song   Song   @relation(fields: [songId], references: [id])
+  songId String
 }
 
 model MixSettings {
@@ -59,7 +58,6 @@ model MixSettings {
 
 model TrackSettings {
   id       String @id @default(uuid())
-  position Int    @default(0)
   songSlug String
   name     String
   mixName  String

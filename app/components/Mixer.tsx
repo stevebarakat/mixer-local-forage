@@ -46,12 +46,13 @@ export default function Mixer({
     currentMix,
     currentTracks: tracks,
   };
+  console.log("initialContext", initialContext);
   const initialContextPromise = new Promise((resolve) =>
     resolve(initialContext)
   );
 
   initialContextPromise.then((initialContext) =>
-    console.log("initialContextPrimise", initialContext)
+    console.log("initialContextPromise", initialContext)
   );
 
   const { channels, isLoading } = useTracks({ tracks });
