@@ -15,15 +15,11 @@ export const loader: LoaderFunction = async ({ request }) => {
     include: { user: true },
   });
 
-  const data: MixSettings = {
-    publicMixesData,
-  };
-  return json(data);
+  return json(publicMixesData);
 };
 
 export default function () {
-  const data = useLoaderData();
-  const publicMixesData = data.publicMixesData;
+  const publicMixesData = useLoaderData();
 
-  return <CommunityMixes communityMixes={publicMixesData} />;
+  return <CommunityMixes communityMixes={publicMixesData as MixSettings[]} />;
 }

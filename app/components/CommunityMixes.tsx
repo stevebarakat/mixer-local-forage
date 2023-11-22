@@ -20,30 +20,25 @@ function CommunityMixes({ communityMixes }: Props) {
           const defaultValue = `${communityMix.mixName} `;
           return (
             <li key={communityMix.songSlug}>
-              <h4>{unSlugify(defaultValue)}</h4>
+              {/* <h4>{unSlugify(defaultValue)}</h4> */}
               <div
                 className="community-mix-list hover-img"
                 style={{
-                  backgroundImage: `url('assets/${communityMix.coverArt}')`,
+                  backgroundImage: `url('images/${communityMix.coverArt}.svg')`,
                 }}
               >
                 <figcaption>
-                  <header>{unSlugify(defaultValue)}</header>
-                  <Link
-                    key={communityMix.id}
-                    title="Go to mix"
-                    to={`/${slugify(user[0])}/${communityMix.songSlug}/${
-                      communityMix.id
-                    }`}
-                  >
-                    <ul>
-                      {/* <li>Song: {communityMix.title}</li>
-                      <li>Artist: {communityMix.artist}</li>
-                      <li>Year: {communityMix.year}</li>
-                      <li>Studio: {communityMix.studio}</li>
-                      <li>Location: {communityMix.location}</li> */}
-                    </ul>
-                  </Link>
+                  <header style={{ top: "100px", textAlign: "center" }}>
+                    <Link
+                      key={communityMix.id}
+                      title="Go to mix"
+                      to={`/${slugify(user[0])}/${communityMix.songSlug}/${
+                        communityMix.id
+                      }`}
+                    >
+                      {unSlugify(defaultValue)}
+                    </Link>
+                  </header>
                 </figcaption>
                 <div className="vertical-space-between">
                   <Link
