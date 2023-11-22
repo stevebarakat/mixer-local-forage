@@ -165,7 +165,7 @@ body {
 .main.volume::-webkit-slider-thumb {
   top: -9px;
   border-width: 8px;
-  padding: 8px;
+  padding: 17px;
 }
 
 .window {
