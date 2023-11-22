@@ -1,21 +1,41 @@
-import { localStorageGet } from "./localStorage.client";
+import localforage from "localforage";
 
-export function getSourceSong() {
-  const sourceSong = localStorageGet("sourceSong");
-  return sourceSong;
-}
-const sourceSong = getSourceSong();
+const ubu = () => {
+  let initialSourceSong: SourceSong | unknown;
+  let initialCurrentMix: MainSettings | unknown;
+  let initialCurrentTracks: TrackSettings[] | unknown;
+  window.addEventListener("load", () => {
+    localforage
+      .getItem("sourceSong")
+      .then(function (sourceSong) {
+        console.log("sourceSong", sourceSong);
+        initialSourceSong = sourceSong;
+      })
+      .catch(function (err) {
+        console.log("err", err);
+      });
 
-export function getCurrentMix() {
-  const currentMix = localStorageGet("currentMix");
-  return currentMix;
-}
-const currentMix = getCurrentMix();
+    localforage
+      .getItem("sourceSong")
+      .then(function (currentMix) {
+        console.log("currentMix", currentMix);
+        initialCurrentMix = currentMix;
+      })
+      .catch(function (err) {
+        console.log("err", err);
+      });
 
-export function getCurrentTracks() {
-  const currentTracks = localStorageGet("currentTracks");
-  return currentTracks;
-}
-const currentTracks = getCurrentTracks();
-
-export { sourceSong, currentMix, currentTracks };
+    localforage
+      .getItem("sourceSong")
+      .then(function (currentTracks) {
+        console.log("currentTracks", currentTracks);
+        initialCurrentTracks = currentTracks;
+      })
+      .catch(function (err) {
+        console.log("err", err);
+      });
+  });
+  return { initialSourceSong, initialCurrentMix, initialCurrentTracks };
+};
+const ebu = ubu();
+export default ebu;

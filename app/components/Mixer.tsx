@@ -26,9 +26,9 @@ export default function Mixer({
   invariant(tracks, "no tracks found");
   const { channels, isLoading } = useTracks({ tracks });
 
-  console.log("sourceSong", sourceSong);
-  console.log("currentMix", currentMix);
-  console.log("currentTracks", currentTracks);
+  // console.log("sourceSong", sourceSong);
+  // console.log("currentMix", currentMix);
+  // console.log("currentTracks", currentTracks);
 
   useEffect(() => {
     localforage
