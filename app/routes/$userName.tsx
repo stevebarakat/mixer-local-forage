@@ -6,7 +6,7 @@ import SongSelect from "@/components/SongSelect";
 import { slugify } from "@/utils";
 import { prisma as db } from "@/utils/db.server";
 import { useLoaderData } from "@remix-run/react";
-import { getAutomationData } from "~/utils/controls.server";
+// import { getAutomationData } from "~/utils/controls.server";
 
 export const loader: LoaderFunction = async ({
   request,
@@ -28,12 +28,11 @@ export const loader: LoaderFunction = async ({
     },
   });
 
-  const automationData = await getAutomationData();
+  // const automationData = await getAutomationData();
 
   const data = {
     sessionUser,
     userMixes,
-    automationData,
   };
   return json(data);
 };
@@ -48,15 +47,11 @@ export let action: ActionFunction = async ({ request }) => {
 };
 
 export default function DashboardRoute() {
-  const { sessionUser, userMixes, automationData } = useLoaderData();
+  const { sessionUser, userMixes } = useLoaderData();
 
   return (
     <>
-      <UserMixes
-        user={sessionUser}
-        userMixes={userMixes}
-        automationData={automationData}
-      />
+      <UserMixes user={sessionUser} userMixes={userMixes} />
       <SongSelect />
     </>
   );

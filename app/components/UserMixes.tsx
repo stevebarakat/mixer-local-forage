@@ -5,15 +5,13 @@ import useDelete from "@/hooks/useDelete";
 // import useTogglePrivacy from "@/hooks/useTogglePrivacy";
 import { GitFork, Trash, Lock, Unlock } from "lucide-react";
 import { slugify, unSlugify } from "@/utils";
-import type { AutomationData } from "@prisma/client";
 
 type Props = {
   user: User;
   userMixes: MainSettings[];
-  automationData: AutomationData[];
 };
 
-function UserMixes({ user, userMixes, automationData }: Props) {
+function UserMixes({ user, userMixes }: Props) {
   const navigate = useNavigate();
   const forkMix = useFork();
   const deleteMix = useDelete();

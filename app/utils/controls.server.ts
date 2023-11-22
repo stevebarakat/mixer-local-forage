@@ -1,9 +1,9 @@
 import { prisma } from "@/utils/db.server";
 
-export async function getAutomationData() {
-  const automationData = await prisma.automationData.findMany();
-  return automationData;
-}
+// export async function getAutomationData() {
+//   const automationData = await prisma.automationData.findMany();
+//   return automationData;
+// }
 
 export async function getSourceSong(slug: string | undefined) {
   return await prisma.song.findUnique({
