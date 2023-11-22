@@ -24,6 +24,9 @@ type Props = {
   currentMix: MixSettings;
   currentTracks: TrackSettings[];
 };
+
+let initialContext;
+
 export default function Mixer({
   sourceSong,
   currentMix,
@@ -41,18 +44,14 @@ export default function Mixer({
   }));
 
   invariant(tracks, "no tracks found");
-  const initialContext = {
+  const initialData = {
     sourceSong,
     currentMix,
     currentTracks: tracks,
   };
-  const initialContextPromise = new Promise((resolve) =>
-    resolve(initialContext)
-  );
+  const initialContextPromise = new Promise((resolve) => resolve(initialData));
 
-  initialContextPromise.then((initialContext) =>
-    console.log("initialContextPromise", initialContext)
-  );
+  initialContextPromise.then((initialData) => (initialContext = initialData));
 
   const { channels, isLoading } = useTracks({ tracks });
 
@@ -97,4 +96,4 @@ export default function Mixer({
     );
   }
 }
-// export { initialContext };
+export { initialContext };
