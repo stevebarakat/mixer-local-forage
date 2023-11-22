@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "@remix-run/react";
+import { Link } from "@remix-run/react";
 import MixName from "@/components/MixName";
 import useFork from "@/hooks/useFork";
 import useDelete from "@/hooks/useDelete";
@@ -12,18 +12,9 @@ type Props = {
 };
 
 function UserMixes({ user, userMixes }: Props) {
-  const navigate = useNavigate();
   const forkMix = useFork();
   const deleteMix = useDelete();
   // const { isPrivate, togglePrivacy } = useTogglePrivacy();
-
-  function handleClick(e: React.FormEvent<HTMLSelectElement>) {
-    console.log("e.currentTarget.id", e.currentTarget.id);
-    const id = parseInt(e.currentTarget.id, 10);
-    return navigate(
-      `/${slugify(user.userName)}/${userMixes[id].songSlug}/${userMixes[id].id}`
-    );
-  }
 
   return (
     <div>

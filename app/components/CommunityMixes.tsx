@@ -20,7 +20,6 @@ function CommunityMixes({ communityMixes }: Props) {
           const defaultValue = `${communityMix.mixName} `;
           return (
             <li key={communityMix.songSlug}>
-              {/* <h4>{unSlugify(defaultValue)}</h4> */}
               <div
                 className="community-mix-list hover-img"
                 style={{
